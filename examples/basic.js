@@ -9,11 +9,12 @@ try {
 }
 
 const accessToken = (() => {
-  if (process.argv.length !== 3) {
-    console.log('usage: node examples/basic.js <wit-access-token>');
-    process.exit(1);
-  }
-  return process.argv[2];
+  // if (process.argv.length !== 3) {
+  //   console.log('usage: node examples/basic.js <wit-access-token>');
+  //   process.exit(1);
+  // }
+  // return process.argv[2];
+  return "KY2YTSDBZKPRRVG5TF4GKHFGPXJ2WP2G";
 })();
 
 const actions = {
@@ -25,6 +26,14 @@ const actions = {
       console.log('sending...', JSON.stringify(response));
       return resolve();
     });
+  },
+  echoLocation({context, entities}) {
+    context.location = entities.location;
+    return Promise.resolve(context);
+  },
+  longTime({context, entities}) {
+    context.years = Math.random() * (100 - 2) + 2;
+    return Promise.resolve(context);
   },
 };
 
